@@ -30,10 +30,20 @@ iris = iris[randNum]
 
 # Divide data into train and test
 X = iris[:, 0:4]
-# X = min_max_normalization(X)
-X = z_normalization(X)
+print("Please choose your choice to normalize data:")
+print("A: No Normalization")
+print("B: Min Max Normalization")
+print("C: Standard Normalization")
+choice = input("You: ")
+if choice == "B":
+    X = min_max_normalization(X)
+elif choice == "C":
+    X = z_normalization(X)
+elif choice != "A" and choice != "B" and choice != "C":
+    print("Invalid Input!")
+
 y = iris[:, 4]
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 
 # non nan iris

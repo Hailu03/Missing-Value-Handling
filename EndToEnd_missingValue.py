@@ -123,7 +123,7 @@ model = keras.models.Model(inputs=input_layer, outputs=[pred, data_filled])
 model.summary()
 
 epochs = 100
-batch_size = 28
+batch_size = 32
 
 callbacks = [keras.callbacks.ReduceLROnPlateau(monitor="val_loss",
                                                factor=0.5,
@@ -152,6 +152,15 @@ history = model.fit(x=x_train_input,
                     callbacks=callbacks,
                     validation_data=(x_test_input, {output1: y_test}),
                     verbose=1)
+
+train_loss_output1 = history.history['loss']
+train_loss_output2 = history.history['pred_loss']
+plt.title("MSE Loss")
+plt.plot(train_loss_output1,c='g')
+plt.show()
+plt.title("Prediction Loss")
+plt.plot(train_loss_output2,c='b')
+plt.show()
 
 # predict
 
