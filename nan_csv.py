@@ -45,16 +45,20 @@ elif choice != "A" and choice != "B" and choice != "C":
 y = iris[:, 4]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-
 # non nan iris
-non_nan_iris = pd.DataFrame(X_train, columns=['sepal_length', 'sepal_width', 'petal_length', 'petal_width'])
-non_nan_iris['Species'] = y_train
-non_nan_iris.to_csv(f'Iris_Filling_Target.csv', index=False)
+# non_nan_iris = pd.DataFrame(X_train, columns=['sepal_length', 'sepal_width', 'petal_length', 'petal_width'])
+# non_nan_iris['Species'] = y_train
+# non_nan_iris.to_csv(f'Iris_Filling_Target.csv', index=False)
 
-# Calculate % of the total number of values in the dataset
-prob = 0.05
+# Save the dataset with NaN values to a new CSV file
+temp = pd.DataFrame(X_test, columns=['sepal_length', 'sepal_width', 'petal_length', 'petal_width'])
+temp['Species'] = y_test
+temp.to_csv('Iris_test.csv', index=False)
+
+# save nan file
+prob = 5
 for i in range(4):
-    nan_mask = np.random.choice([False, True], size=X_train.shape, p=[1-prob, prob])
+    nan_mask = np.random.choice([False, True], size=X_train.shape, p=[1-prob/100, prob/100])
     # Replace of data points with NaN values
     temp = X_train.copy()
     temp[nan_mask] = np.nan
@@ -62,5 +66,5 @@ for i in range(4):
     # Save the dataset with NaN values to a new CSV file
     temp = pd.DataFrame(temp, columns=['sepal_length', 'sepal_width', 'petal_length', 'petal_width'])
     temp['Species'] = y_train
-    temp.to_csv(f'IrisNan{int(prob * 100)}.csv', index=False)
-    prob += 0.05
+    temp.to_csv(f'IrisNan{prob}.csv', index=False)
+    prob += 5

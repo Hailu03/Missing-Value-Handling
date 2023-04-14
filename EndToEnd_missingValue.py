@@ -9,7 +9,6 @@ from sklearn.metrics import accuracy_score
 
 
 nan_percent = 0.20
-labels = ['Iris-setosa','Iris-versicolor','Iris-virginica']
 iris = pd.read_csv(f'IrisNan20.csv',delimiter=',',header=0) # read csv file
 df_train_nan_mask = iris.isna()
 

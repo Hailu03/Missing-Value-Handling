@@ -27,8 +27,7 @@ def predict_label(X_train, y_train,X_test):
     y_pred = gnb.predict(X_test)
     return y_pred
 def main(prob):
-    labels = ['Iris-setosa','Iris-versicolor','Iris-virginica']
-    iris = pd.read_csv(f'IrisNan{int(prob * 100)}.csv',delimiter=',',header=0) # read csv file
+    iris = pd.read_csv(f'IrisNan{prob}.csv',delimiter=',',header=0) # read csv file
 
     iris = np.array(iris) # convert to numpy
 
@@ -42,19 +41,18 @@ def main(prob):
 
     X_train,y_train = IgnoreMissingData(X,y)
     y_pred = predict_label(X_train,y_train,X_test)
-    print("Accuacy of Ignoring Missing Data: {}%".format(round(accuracy_score(y_pred,y_test)*100,2)))
+    print("Accuracy of Ignoring Missing Data: {}%".format(round(accuracy_score(y_pred,y_test)*100,2)))
 
     X_train,y_train = ImputeMean(X,y)
     y_pred = predict_label(X_train,y_train,X_test)
-    print("Accuacy of Impute Mean Missing Data: {}%".format(round(accuracy_score(y_pred,y_test)*100,2)))
+    print("Accuracy of Impute Mean Missing Data: {}%".format(round(accuracy_score(y_pred,y_test)*100,2)))
 
     X_train,y_train = ImputeGlobalConstant(X,y)
     y_pred = predict_label(X_train,y_train,X_test)
-    print("Accuacy of Impute Global Constant Missing Data: {}%\n".format(round(accuracy_score(y_pred,y_test)*100,2)))
+    print("Accuracy of Impute Global Constant Missing Data: {}%\n".format(round(accuracy_score(y_pred,y_test)*100,2)))
 
-if __name__ == "__main__":
-    prob = 0.05
-    for i in range(4):
-        print(f"Missing data {int(prob*100)}%")
-        main(prob)
-        prob+=0.05
+prob = 5
+for i in range(4):
+    print(f"Missing data {prob}%")
+    main(prob)
+    prob+=5
