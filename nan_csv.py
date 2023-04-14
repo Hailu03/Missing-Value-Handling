@@ -46,9 +46,9 @@ y = iris[:, 4]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
 # non nan iris
-# non_nan_iris = pd.DataFrame(X_train, columns=['sepal_length', 'sepal_width', 'petal_length', 'petal_width'])
-# non_nan_iris['Species'] = y_train
-# non_nan_iris.to_csv(f'Iris_Filling_Target.csv', index=False)
+non_nan_iris = pd.DataFrame(X_train, columns=['sepal_length', 'sepal_width', 'petal_length', 'petal_width'])
+non_nan_iris['Species'] = y_train
+non_nan_iris.to_csv(f'Iris_Filling_Target.csv', index=False)
 
 # Save the dataset with NaN values to a new CSV file
 temp = pd.DataFrame(X_test, columns=['sepal_length', 'sepal_width', 'petal_length', 'petal_width'])

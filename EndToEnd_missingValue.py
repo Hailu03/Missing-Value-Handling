@@ -8,7 +8,6 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import accuracy_score
 
 
-nan_percent = 0.20
 iris = pd.read_csv(f'IrisNan20.csv',delimiter=',',header=0) # read csv file
 df_train_nan_mask = iris.isna()
 
@@ -121,7 +120,7 @@ pred = keras.layers.Dense(3, activation="softmax", name='pred')(x)
 model = keras.models.Model(inputs=input_layer, outputs=[pred, data_filled])
 model.summary()
 
-epochs = 100
+epochs = 200
 batch_size = 32
 
 callbacks = [keras.callbacks.ReduceLROnPlateau(monitor="val_loss",
